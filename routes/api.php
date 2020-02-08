@@ -36,4 +36,42 @@ Route::group(['prefix'  => 'v1', 'as'=>'v1.'], function(){
     ]);
 
   });
+
+  Route::group(['prefix'  => 'organizer', 'as'=>'organizer.'], function(){
+    Route::get('/data', [
+      'uses'  => 'C_organizer@data'
+    ]);
+
+    Route::post('/create', [
+      'uses'  => 'C_organizer@create'
+    ]);
+
+    Route::post('/update', [
+      'uses'  => 'C_organizer@update'
+    ]);
+
+    Route::post('/delete', [
+      'uses'  => 'C_organizer@delete'
+    ]);
+
+  });
+  
+  Route::group(['prefix'  => 'event', 'as'=>'event.'], function(){
+    Route::get('/data', [
+      'uses'  => 'C_event@data'
+    ]);
+
+    Route::post('/create', [
+      'uses'  => 'C_event@create'
+    ]);
+
+    Route::post('/update', [
+      'uses'  => 'C_event@update'
+    ]);
+
+    Route::post('/delete', [
+      'uses'  => 'C_event@delete'
+    ]);
+
+  });
 });
