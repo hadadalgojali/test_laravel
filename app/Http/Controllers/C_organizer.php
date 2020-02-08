@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Ixudra\Curl\Facades\Curl;
 
+use App\M_log;
+
 class C_organizer extends Controller
 {
     //
@@ -44,10 +46,18 @@ class C_organizer extends Controller
         ->asJson()
         ->post();
         
+        $query = new M_log;
         if (isset($resp->message)) {
-        	$response['code']       = 401;
-        	$response['message']    = $resp->message;
+            $response['code']       = 401;
+            $response['message']    = $resp->message;
+            $query->response        = $resp->message;
         }
+
+        $query->id          = $this->get_last_id_log();
+        $query->url         = "http://tester.t4.voxteneo.com/sport_events_voxteneo/api/organizers";
+        $query->parameter   = "";
+        $query->save();
+        
         if ($response['code']==200) {
             DB::commit();
         }else{
@@ -77,10 +87,18 @@ class C_organizer extends Controller
         ->asJson()
         ->put();
 
+        $query = new M_log;
         if (isset($resp->message)) {
-        	$response['code']       = 401;
-        	$response['message']    = $resp->message;
+            $response['code']       = 401;
+            $response['message']    = $resp->message;
+            $query->response        = $resp->message;
         }
+
+        $query->id          = $this->get_last_id_log();
+        $query->url         = "http://tester.t4.voxteneo.com/sport_events_voxteneo/api/organizers";
+        $query->parameter   = "";
+        $query->save();
+        
         if ($response['code']==200) {
             DB::commit();
         }else{
@@ -102,10 +120,18 @@ class C_organizer extends Controller
         $resp = Curl::to("http://tester.t4.voxteneo.com/sport_events_voxteneo/api/organizers/".$parameter['id'])
         ->delete();
         // echo json_encode($resp);die;
+        $query = new M_log;
         if (isset($resp->message)) {
         	$response['code']       = 401;
         	$response['message']    = $resp->message;
+            $query->response        = $resp->message;
         }
+
+        $query->id          = $this->get_last_id_log();
+        $query->url         = "http://tester.t4.voxteneo.com/sport_events_voxteneo/api/organizers";
+        $query->parameter   = "";
+        $query->save();
+        
         if ($response['code']==200) {
             DB::commit();
         }else{
@@ -152,6 +178,18 @@ class C_organizer extends Controller
 	    }
 
 	    return $last_id + 1;
+    }
+
+
+    private function get_last_id_log(){
+        $last_id    = M_log::find(M_log::max('id'));
+
+        if ($last_id !== null) {
+            $last_id = $last_id->id + 1;
+        }else{
+            $last_id = 1;
+        }
+        return $last_id;
     }
 
 }

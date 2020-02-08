@@ -3,7 +3,7 @@
 	<div class ="container-fluid">
 		<div style="margin-top: 10px;display: none;" id="msg-success" class="alert alert-primary" role="alert">Success</div>
 		<div style="margin-top: 10px;display: none;" id="msg-error" class="alert alert-danger" role="alert">Failed</div>
-		<h1 class ="mt-4">Informasi Barang</h1>
+		<h1 class ="mt-4">Info Organizer</h1>
 		<a class="btn btn-primary" href="{{URL::to('/')}}/organizer/form">Add</a>
 		<hr/>
 		<table class="table" id="data-table">
