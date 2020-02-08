@@ -90,12 +90,16 @@
 					}
 					document.getElementById('loading').style.display = "none";
 					$("#my_modal").modal("hide");
+					document.getElementById('btn-modal-close').disabled = false;
+					document.getElementById('btn-modal-save').disabled = false;
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
 					document.getElementById('msg-error').style.display = "";
 					$("msg-error").html("Error connection");
 					document.getElementById('loading').style.display = "none";
 					$("#my_modal").modal("hide");
+					document.getElementById('btn-modal-close').disabled = false;
+					document.getElementById('btn-modal-save').disabled = false;
 				}
 			});
 		});
